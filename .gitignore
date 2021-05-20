@@ -130,4 +130,4 @@ dmypy.json
 .pyre/
 
 # MySQL data
-*mysql-data
+*mysql-data/**
