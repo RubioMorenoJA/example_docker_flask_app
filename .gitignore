@@ -130,4 +130,5 @@ dmypy.json
 .pyre/
 
 # MySQL data
-mysql/mysql-data/*
+docker_server_dev/mysql/mysql-data/*
+!docker_server_dev/mysql/mysql-data/.gitkeep
