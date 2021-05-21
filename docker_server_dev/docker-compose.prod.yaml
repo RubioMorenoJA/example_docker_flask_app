@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+
+    nginx:
+        build: ./nginx
+        image: docker_server/nginx_image
+        container_name: docker_server_nginx_cont
+        ports:
+            - 8080:80
+        depends_on:
+            - flask_app
+
+    flask_app:
+        build: ./flask_app
+        image: docker_server/flask_image
+        container_name: docker_server_flask_cont
+        command: gunicorn --bind 0.0.0.0:5000 main:app
+        # We delete volumes cause we don't need it in production
+        #volumes:
+        #  - ./flask_app/:/usr/src/app/
+        # We don't need ports because we use a nginx interface
+        #ports:
+        #  - 5000:5000
+        # We use expose to show the port internally
+        expose:
+            - 5000
+        links:
+            - mysql
+        depends_on:
+            - mysql
+        #env_file:
+        #  - ./.env.dev
+    
+    mysql:
+        image: mysql:5.7
+        container_name: docker_server_mysql_cont
+        #restart: always
+        ports:
+            - 3306:3306
+        volumes:
+            - ./mysql/init_table.sql:/docker-entrypoint-initdb.d/1.sql
+            - ./mysql/mysql-data:/var/lib/mysql
+        environment:            
+            MYSQL_USER: myuser
+            MYSQL_PASSWORD: secret
+            MYSQL_ROOT_PASSWORD: root_secret
+            MYSQL_DATABASE: multicont_db

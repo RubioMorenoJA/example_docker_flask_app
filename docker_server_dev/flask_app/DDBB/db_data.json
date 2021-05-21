@@ -1,0 +1,11 @@
+{
+  "name": "DDBB",
+  "version": "1.0.0",
+  "database": {
+    "user": "root",
+    "password": "root_secret",
+    "host": "mysql",
+    "port": "3306",
+    "database": "multicont_db"
+  }
+}

@@ -1,0 +1,50 @@
+Users endpoint
+---
+paths:
+  /users:
+    get:
+      tags:
+        - Users
+      summary: Get users
+      responses:
+        '200':
+          description: Success returning users
+#          content:
+#            application/json:
+#              schema:
+#                type: array
+#                items:
+#                  $ref: '#components/schemas/users'
+    post:
+      summary: Create new user
+      responses:
+        '201':
+          description: Success creating a new user
+          content:
+            application/json:
+              schema:
+                type: object
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  example: user@telefonica.com
+              required:
+                - username
+        description: Form with new user data
+
+components:
+  schemas:
+    users:
+      properties:
+        id:
+          type: integer
+          example: 1
+        name:
+          type: string
+          example: 'Pope'
