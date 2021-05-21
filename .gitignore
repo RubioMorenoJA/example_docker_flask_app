@@ -131,4 +131,3 @@ dmypy.json
 
 # MySQL data
 mysql/mysql-data/*
-!mysql/mysql-data/.gitkeep
